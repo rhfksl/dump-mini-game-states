@@ -8,7 +8,9 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-redux": "^7.2.0",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,7 +26,15 @@
     ],
     "rules": {
       "react/prefer-stateless-function": 0,
-      "react/jsx-filename-extension": 0,
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
       "react/jsx-one-expression-per-line": 0
     }
   },
