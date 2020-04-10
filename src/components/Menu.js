@@ -2,7 +2,7 @@ import React from 'react';
 
 function Menu(props) {
   return (
-    <div>
+    <div id="top">
       This is Menu component
       <div>
         This is GameTap
