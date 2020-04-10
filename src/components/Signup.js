@@ -58,7 +58,7 @@ class Signup extends Component {
   render() {
     const { redirect } = this.state;
     if (redirect) {
-      return <Redirect to="/welcome" />;
+      return <Redirect to="/" />;
     } else {
       return (
         <Container>
