@@ -1,19 +1,20 @@
 import React from 'react';
-// 임시로 가져와보자
-import { Route } from 'react-router-dom';
-import Welcome from './components/Welcome';
+
+import { withRouter, Route, Switch } from 'react-router-dom';
+import Welcome from './containers/Welcome';
+import Main from './components/Main';
 import Signup from './components/Signup';
 
 function App() {
   return (
     <div className="App">
-      Hello World
-      {/* <Signup /> */}
-      <Route exact path="/welcome" render={() => <Welcome />} />
-      <Route exact path="/signup" render={() => <Signup />} />
-      {/* <Welcome /> */}
+      <Switch>
+        <Route exact path="/" render={() => <Welcome />} />
+        <Route exact path="/signup" render={() => <Signup />} />
+        <Route exact path="/main" render={() => <Main />} />
+      </Switch>
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

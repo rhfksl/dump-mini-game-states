@@ -3,11 +3,13 @@
   font-weight: bold;
   text-align: center;
 }
-
+#top {
+  padding-top: 50px;
+}
 .container {
   background-color: rgba(211, 211, 211, 0.6);
   margin: auto;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   border-radius: 120px / 120px;
   padding: 30px 0 30px 0;
 }

@@ -8,7 +8,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  isLogined: true,
+  isLogined: false,
   displayMode: 'Game',
   gametype: '1',
   articles: [],

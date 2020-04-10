@@ -21,12 +21,14 @@ class Signup extends Component {
     };
   }
 
+  // 들어오는 Input값에 따라 state의 user정보가 변하는 함수
   handleInputValue = (key) => (e) => {
     let result = this.state;
     result.user[key] = e.target.value;
     this.setState(result);
   };
 
+  // 입력된 패스워드가 서로 맞는지 확인하는 함수
   passwordCheck = (state) => {
     if (state.user.password === state.user.passwordCheck) {
       return true;
@@ -34,6 +36,7 @@ class Signup extends Component {
     return false;
   };
 
+  // submit버튼 클릭 시 서버에 singup post요청을 보내는 함수
   signUp = (e) => {
     e.preventDefault();
     let body = this.state;
@@ -55,7 +58,7 @@ class Signup extends Component {
   render() {
     const { redirect } = this.state;
     if (redirect) {
-      return <Redirect to="/welcome" />;
+      return <Redirect to="/" />;
     } else {
       return (
         <Container>
