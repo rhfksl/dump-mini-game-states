@@ -2,8 +2,8 @@ import React from 'react';
 
 import { withRouter, Route, Switch } from 'react-router-dom';
 import Welcome from './containers/Welcome';
-import Main from './components/Main';
 import Signup from './components/Signup';
+import Main from './components/Main';
 
 function App() {
   return (
