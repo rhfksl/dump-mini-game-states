@@ -18,6 +18,8 @@ class Signup extends Component {
         email: '',
       },
       redirect: false,
+      isIdChecked: false,
+      isNicknameChecked: false,
     };
   }
 
@@ -40,9 +42,17 @@ class Signup extends Component {
   signUp = (e) => {
     e.preventDefault();
     let body = this.state;
-    let check = this.passwordCheck(this.state);
+    let passwordCheck = this.passwordCheck(this.state);
 
-    if (check) {
+    if (!this.state.isIdChecked) {
+      alert('ID 중복여부를 확인해 해주세요');
+    }
+
+    if (!this.state.isNicknameChecked) {
+      alert('닉네임 중복여부를 확인해 해주세요');
+    }
+
+    if (passwordCheck) {
       axios
         .post('http://13.209.41.64:4100/users/signup', body)
         .then((res) => {
@@ -53,6 +63,27 @@ class Signup extends Component {
     } else {
       alert('비밀번호가 서로 맞지 않습니다');
     }
+  };
+
+  // 중복ID가 존재하는지 확인하는 함수
+  checkDuplicate = (url) => {
+    let body = this.state;
+
+    axios
+      .post(`http://13.209.41.64:4100/${url}`, body)
+      .then((res) => {
+        if (url === 'checkID') {
+          let curState = this.state;
+          curState.isIdChecked = true;
+          this.setState(curState);
+        } else {
+          let curState = this.state;
+          curState.isNicknameChecked = true;
+          this.setState(curState);
+        }
+        alert('사용 가능합니다.');
+      })
+      .catch((err) => alert('이미 사용중입니다.'));
   };
 
   render() {
@@ -88,6 +119,18 @@ class Signup extends Component {
                       aria-describedby="inputGroup-sizing-default"
                       onChange={this.handleInputValue('username')}
                     />
+                    <span>
+                      <button
+                        type="button"
+                        className="btn btn-primary button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          this.checkDuplicate('checkID');
+                        }}
+                      >
+                        ID CHECK
+                      </button>
+                    </span>
                   </div>
                 </div>
 
@@ -151,6 +194,18 @@ class Signup extends Component {
                       aria-describedby="inputGroup-sizing-default"
                       onChange={this.handleInputValue('nickname')}
                     />
+                    <span>
+                      <button
+                        type="button"
+                        className="btn btn-primary button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          this.checkDuplicate('checkID');
+                        }}
+                      >
+                        NICKNAME CHECK
+                      </button>
+                    </span>
                   </div>
                 </div>
 
