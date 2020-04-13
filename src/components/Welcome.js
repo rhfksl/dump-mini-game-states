@@ -36,19 +36,20 @@ function Welcome(props) {
                 // store의 isLogined 상태 변경
                 props.login();
                 // 아래 함수를 통해 store의 닉네임 변경 후 입장.
-                let obj = {};
-                obj.username = document.querySelector('#IDbox').value;
-                obj.password = document.querySelector('#PWbox').value;
-
+                let obj = { user: {} };
+                obj.user.username = document.querySelector('#IDbox').value;
+                obj.user.password = document.querySelector('#PWbox').value;
+                console.log(obj);
                 axios.defaults.withCredentials = true;
                 axios
                   .post('http://13.209.41.64:4100/users/signin', obj)
                   .then((res) => {
-                    props.changeNickname(res.user.nickname);
+                    console.log(res);
+                    props.changeNickname(res.data.user.nickname);
                     // main페이지로 이동
                     props.history.push('main');
                   })
-                  .catch((error) => console.log(error));
+                  .catch((error) => console.log('여기다 여기', error));
               }}
             >
               Let's Play!!
