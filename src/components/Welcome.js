@@ -6,6 +6,19 @@ import axios from 'axios';
 function Welcome(props) {
   return (
     <section id="BG">
+      {/* 아래 changeToken함수를 이용해 state를 변경하세요
+      첫 번째 인자는 accessToken, 두 번째 인자는 refreshToken을 넣으면 
+      store의 state가 변경됩니다.
+      함수 사용후 아래 div는 지워주세용~
+      */}
+      <div
+        onClick={(e) => {
+          e.preventDefault();
+          props.changeToken('asdf', 'qwer');
+        }}
+      >
+        연습용 버튼
+      </div>
       <div>
         <div>
           <section id="leftCon">
@@ -36,19 +49,20 @@ function Welcome(props) {
                 // store의 isLogined 상태 변경
                 props.login();
                 // 아래 함수를 통해 store의 닉네임 변경 후 입장.
-                let obj = {};
-                obj.username = document.querySelector('#IDbox').value;
-                obj.password = document.querySelector('#PWbox').value;
-
+                let obj = { user: {} };
+                obj.user.username = document.querySelector('#IDbox').value;
+                obj.user.password = document.querySelector('#PWbox').value;
+                console.log(obj);
                 axios.defaults.withCredentials = true;
                 axios
                   .post('http://13.209.41.64:4100/users/signin', obj)
                   .then((res) => {
-                    props.changeNickname(res.user.nickname);
+                    console.log(res);
+                    props.changeNickname(res.data.user.nickname);
                     // main페이지로 이동
                     props.history.push('main');
                   })
-                  .catch((error) => console.log(error));
+                  .catch((error) => console.log('여기다 여기', error));
               }}
             >
               Let's Play!!
