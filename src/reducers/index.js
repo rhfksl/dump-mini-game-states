@@ -5,6 +5,7 @@ import {
   NICKNAME,
   ARTICLES,
   LEADER_BOARD,
+  CHANGE_TOKEN,
 } from '../actions';
 
 const initialState = {
@@ -14,6 +15,10 @@ const initialState = {
   articles: [],
   nickname: 'guest',
   leaderBoard: [],
+  token: {
+    accessToken: '',
+    refreshToken: '',
+  },
 };
 
 const reducers = (state = initialState, action) => {
@@ -56,6 +61,16 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         leaderBoard: action.leaderBoard,
+      };
+    }
+
+    case CHANGE_TOKEN: {
+      return {
+        ...state,
+        token: {
+          accesToken: action.token.accessToken,
+          refreshToken: action.token.refreshToken,
+        },
       };
     }
 

@@ -6,6 +6,19 @@ import axios from 'axios';
 function Welcome(props) {
   return (
     <section id="BG">
+      {/* 아래 changeToken함수를 이용해 state를 변경하세요
+      첫 번째 인자는 accessToken, 두 번째 인자는 refreshToken을 넣으면 
+      store의 state가 변경됩니다.
+      함수 사용후 아래 div는 지워주세용~
+      */}
+      <div
+        onClick={(e) => {
+          e.preventDefault();
+          props.changeToken('asdf', 'qwer');
+        }}
+      >
+        연습용 버튼
+      </div>
       <div>
         <div>
           <section id="leftCon">
