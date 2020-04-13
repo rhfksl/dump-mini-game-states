@@ -7,7 +7,7 @@ function Menu(props) {
       <ul className="sidebar-nav">
         <li className="d-xl-flex sidebar-brand" id="BTImg"></li>
         <li>
-          <div id="menuGame" type="button" onclick={() => this.props}>
+          <div id="menuGame" type="button" /*onclick={() => props}*/>
             Game
           </div>
         </li>
