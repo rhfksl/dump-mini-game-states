@@ -52,16 +52,22 @@ class Signup extends Component {
       alert('닉네임 중복여부를 확인해 해주세요');
     }
 
-    if (passwordCheck) {
+    if (!passwordCheck) {
+      alert('비밀번호가 서로 맞지 않습니다');
+    }
+
+    if (
+      this.state.isIdChecked &&
+      this.state.isNicknameChecked &&
+      passwordCheck
+    ) {
       axios
-        .post('http://13.209.41.64:4100/users/signup', body)
+        .post('http://14.41.86.57:4100/users/signup', body)
         .then((res) => {
           alert('다시 로그인해 주세요');
           this.setState({ redirect: true });
         })
         .catch((err) => alert(err));
-    } else {
-      alert('비밀번호가 서로 맞지 않습니다');
     }
   };
 
@@ -70,20 +76,26 @@ class Signup extends Component {
     let body = this.state;
 
     axios
-      .post(`http://13.209.41.64:4100/${url}`, body)
+      .post(`http://14.41.86.57:4100/users/${url}`, body)
       .then((res) => {
-        if (url === 'checkID') {
+        if (url === 'checkID' && res.data === 'Username available') {
           let curState = this.state;
           curState.isIdChecked = true;
           this.setState(curState);
-        } else {
+          alert('사용 가능합니다.');
+        } else if (
+          url === 'checknickname' &&
+          res.data === 'Nickname Available'
+        ) {
           let curState = this.state;
           curState.isNicknameChecked = true;
           this.setState(curState);
+          alert('사용 가능합니다.');
+        } else {
+          alert('이미 사용중입니다.');
         }
-        alert('사용 가능합니다.');
       })
-      .catch((err) => alert('이미 사용중입니다.'));
+      .catch((err) => alert(err));
   };
 
   render() {
@@ -94,6 +106,16 @@ class Signup extends Component {
       return (
         <Container>
           <div id="top">
+            <div>
+              <nav className="navbar navbar-light navbar-expand-md" id="nav">
+                <div className="container-fluid">
+                  <div className="navbar-brand" id="TeamName">
+                    Black Tardis
+                  </div>
+                </div>
+              </nav>
+            </div>
+
             <div className="container">
               <div className="row">
                 <div id="title" className="col-7">
@@ -200,7 +222,7 @@ class Signup extends Component {
                         className="btn btn-primary button"
                         onClick={(e) => {
                           e.preventDefault();
-                          this.checkDuplicate('checkID');
+                          this.checkDuplicate('checknickname');
                         }}
                       >
                         NICKNAME CHECK
