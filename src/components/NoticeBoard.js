@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import NoticeBoardLists from './NoticeBoardLists';
-import Article from './Article';
-import { Route, withRouter } from 'react-router-dom';
+import Info from '../containers/Info';
+import Menu from '../containers/Menu';
+import { withRouter, Link } from 'react-router-dom';
 const shortid = require('shortid');
 
 axios.defaults.withCredentials = true;
@@ -10,107 +11,92 @@ class NoticeBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      articles: [],
-      mode: 'lists',
-      curArticle: [],
+      // articles: [],
     };
   }
 
-  // componentDidMount() {
-  //   axios
-  //     .get('http://13.209.41.64:4100/articles')
-  //     .then((res) => {
-  //       this.changeArticles(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
+  componentDidMount() {
+    const config = {
+      headers: { Authorization: this.props.token.accessToken },
+    };
 
-  changeArticles(articles) {
-    this.setState({ articles });
+    axios
+      .get('http://13.209.41.64:4100/articles', config)
+      .then((res) => {
+        this.props.changeArticles(res.data);
+      })
+      .catch((err) => console.log(err));
   }
 
-  goback = () => {
-    this.setState({ mode: 'lists' });
-  };
-
+  //확인용
   moveToArticle = (article) => {
-    this.setState({ mode: 'article', curArticle: article });
+    this.props.changeCurrentArticle(article);
   };
 
   render() {
-    const { articles, mode, curArticle } = this.state;
-    if (mode === 'lists') {
-      return (
-        <div>
-          <table className="table">
-            <thead className="thead-light">
-              <tr>
-                <th width="10%" scope="col">
-                  번호
-                </th>
-                <th width="60%" scope="col">
-                  Title
-                </th>
-                <th width="10%" scope="col">
-                  Author
-                </th>
-                <th width="20%" scope="col">
-                  Created_at
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {articles.map((val, idx) => (
-                <NoticeBoardLists
-                  key={shortid.generate()}
-                  article={val}
-                  idx={idx}
-                  moveToArticle={this.moveToArticle}
-                />
-              ))}
-            </tbody>
-          </table>
-          <input
-            type="button"
-            value="state를 바꾸는 용도입니다"
-            onClick={() => {
-              this.changeArticles([
-                {
-                  title: 'Hello world',
-                  contents: 'This is contents example',
-                  user_id: 2,
-                  likes: 5,
-                  dislikes: 1,
-                  created_at: '2020-04-05 22:04:40',
-                },
-                {
-                  title: 'Hello pi',
-                  contents: 'This is contents pi',
-                  user_id: 3,
-                  likes: 2,
-                  dislikes: 0,
-                  created_at: '2020-04-06 12:24:40',
-                },
-                {
-                  title: 'World of Wonders',
-                  contents: 'Penguin who travels a lot',
-                  user_id: 1,
-                  likes: 1,
-                  dislikes: 3,
-                  created_at: '2020-04-06 14:04:40',
-                },
-              ]);
-            }}
-          />
-        </div>
-      );
-    }
+    const articles = this.props.articles;
+
     return (
-      <Route
-        exact
-        path="/article"
-        render={() => <Article article={curArticle} goback={this.goback} />}
-      />
+      <section id="BG">
+        <Info />
+        <div id="wrapper">
+          <Menu />
+          <div className="page-content-wrapper">
+            <div className="container-fluid">
+              <div
+                className="btn btn-link"
+                role="button"
+                id="menu-toggle"
+                href="#menu-toggle"
+              >
+                <i className="fa fa-bars"></i>
+                <div id="menu-toggle" className="btn btn-link">
+                  menu
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-12">
+                  <section id="display">
+                    <div>
+                      <table className="table">
+                        <thead className="thead-light">
+                          <tr>
+                            <th width="10%" scope="col">
+                              번호
+                            </th>
+                            <th width="60%" scope="col">
+                              Title
+                            </th>
+                            <th width="10%" scope="col">
+                              Author
+                            </th>
+                            <th width="20%" scope="col">
+                              Created_at
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {articles.map((val, idx) => (
+                            <NoticeBoardLists
+                              key={shortid.generate()}
+                              article={val}
+                              idx={idx}
+                              moveToArticle={this.moveToArticle}
+                            />
+                          ))}
+                        </tbody>
+                      </table>
+                      <button>
+                        <Link to="/WriteArticle">글쓰기</Link>
+                      </button>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 }
