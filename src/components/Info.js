@@ -23,7 +23,7 @@ function Info(props) {
           <ul className="nav navbar-nav">
             <li className="nav-item" role="presentation">
               <div className="nav-link active" id="welcomePrint">
-                guest or nickname 님, 반갑습니다.
+                {`${props.nickname}`} 님, 반갑습니다.
               </div>
             </li>
             <li className="nav-item" role="presentation">
@@ -33,6 +33,7 @@ function Info(props) {
                 type="button"
                 onClick={() => {
                   props.logOut();
+                  props.changeNickname('guest');
                 }}
               >
                 Logout
