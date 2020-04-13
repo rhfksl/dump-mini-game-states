@@ -13,6 +13,9 @@ function mapDispatchToProps(dispatch) {
     changeNickname: (nickname) => {
       dispatch({ type: 'NICKNAME', nickname });
     },
+    changeToken: (accessToken, refreshToken) => {
+      dispatch({ type: 'CHANGE_TOKEN', token: { accessToken, refreshToken } });
+    },
   };
 }
 
