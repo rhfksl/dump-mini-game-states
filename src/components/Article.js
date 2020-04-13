@@ -9,7 +9,7 @@ class Article extends Component {
 
   goback = () => {
     this.props.goback();
-    this.props.history.push('/');
+    this.props.history.push('/article');
   };
 
   render() {
