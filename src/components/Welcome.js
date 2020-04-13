@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import './Welcome.css';
+import axios from 'axios';
 
 function Welcome(props) {
   return (
@@ -10,11 +11,11 @@ function Welcome(props) {
           <section id="leftCon">
             <div id="BT"></div>
             <Link
+              to="main"
               id="withoutLogin"
               type="button"
               onClick={() => {
                 props.changeNickname('guest');
-                props.history.push('main');
               }}
             >
               Let's Play!!
@@ -35,22 +36,26 @@ function Welcome(props) {
                 // store의 isLogined 상태 변경
                 props.login();
                 // 아래 함수를 통해 store의 닉네임 변경 후 입장.
-                props.changeNickname('ㅆㅂ..');
-                // main페이지로 이동
-                props.history.push('main');
+                let obj = {};
+                obj.username = document.querySelector('#IDbox').value;
+                obj.password = document.querySelector('#PWbox').value;
+
+                axios.defaults.withCredentials = true;
+                axios
+                  .post('http://13.209.41.64:4100/users/signin', obj)
+                  .then((res) => {
+                    props.changeNickname(res.user.nickname);
+                    // main페이지로 이동
+                    props.history.push('main');
+                  })
+                  .catch((error) => console.log(error));
               }}
             >
               Let's Play!!
               <br />
               (Login)
             </div>
-            <Link
-              id="signupbutton"
-              type="button"
-              onClick={() => {
-                props.history.push('signup');
-              }}
-            >
+            <Link to="signup" id="signupbutton" type="button">
               Sign Up :)
             </Link>
           </section>
