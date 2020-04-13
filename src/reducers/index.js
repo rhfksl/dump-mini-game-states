@@ -6,13 +6,24 @@ import {
   ARTICLES,
   LEADER_BOARD,
   CHANGE_TOKEN,
+  CHANGE_CURRENTARTICLE,
 } from '../actions';
 
 const initialState = {
   isLogined: false,
   displayMode: 'Game',
   gametype: '1',
-  articles: [],
+  articles: [
+    {
+      title: 'Hello world',
+      contents: 'This is contents example',
+      user_id: 2,
+      likes: 5,
+      dislikes: 1,
+      created_at: '2020-04-05 22:04:40',
+    },
+  ],
+  article: [],
   nickname: 'guest',
   leaderBoard: [],
   token: {
@@ -71,6 +82,13 @@ const reducers = (state = initialState, action) => {
           accesToken: action.token.accessToken,
           refreshToken: action.token.refreshToken,
         },
+      };
+    }
+
+    case CHANGE_CURRENTARTICLE: {
+      return {
+        ...state,
+        article: action.article,
       };
     }
 
