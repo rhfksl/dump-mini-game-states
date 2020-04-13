@@ -1,61 +1,61 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import './Welcome.css';
+import axios from 'axios';
 
 function Welcome(props) {
   return (
     <section id="BG">
-      <nav class="navbar navbar-light navbar-expand-md" id="nav">
-        <div class="container-fluid">
-          <a class="navbar-brand" id="TeamName" href="!#">
-            Black Tardis
-          </a>
-        </div>
-      </nav>
       <div>
         <div>
           <section id="leftCon">
-            <div id="BTImg"></div>
+            <div id="BT"></div>
             <Link
-              class="btn btn-primary d-xl-flex"
+              to="main"
               id="withoutLogin"
               type="button"
               onClick={() => {
                 props.changeNickname('guest');
-                props.history.push('main');
               }}
             >
-              Let's Play!! (without Login)
+              Let's Play!!
+              <br />
+              (without Login)
             </Link>
           </section>
         </div>
         <div>
           <section id="rightCon">
+            <div id="welTeamName">Black Tardis</div>
             <input type="text" id="IDbox" placeholder="ID 를 입력하세요" />
             <input type="text" id="PWbox" placeholder="PW 를 입력하세요" />
-            <Link
-              class="btn btn-primary d-xl-flex"
+            <div
               id="loginButton"
               type="button"
               onClick={() => {
                 // store의 isLogined 상태 변경
                 props.login();
                 // 아래 함수를 통해 store의 닉네임 변경 후 입장.
-                props.changeNickname('ㅆㅂ..');
-                // main페이지로 이동
-                props.history.push('main');
+                let obj = {};
+                obj.username = document.querySelector('#IDbox').value;
+                obj.password = document.querySelector('#PWbox').value;
+
+                axios.defaults.withCredentials = true;
+                axios
+                  .post('http://13.209.41.64:4100/users/signin', obj)
+                  .then((res) => {
+                    props.changeNickname(res.user.nickname);
+                    // main페이지로 이동
+                    props.history.push('main');
+                  })
+                  .catch((error) => console.log(error));
               }}
             >
-              Let's Play!! (Login)
-            </Link>
-            <Link
-              class="btn btn-primary d-xl-flex"
-              id="signupbutton"
-              type="button"
-              onClick={() => {
-                props.history.push('signup');
-              }}
-            >
+              Let's Play!!
+              <br />
+              (Login)
+            </div>
+            <Link to="signup" id="signupbutton" type="button">
               Sign Up :)
             </Link>
           </section>
