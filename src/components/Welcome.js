@@ -5,19 +5,11 @@ import './Welcome.css';
 function Welcome(props) {
   return (
     <section id="BG">
-      <nav class="navbar navbar-light navbar-expand-md" id="nav">
-        <div class="container-fluid">
-          <a class="navbar-brand" id="TeamName" href="!#">
-            Black Tardis
-          </a>
-        </div>
-      </nav>
       <div>
         <div>
           <section id="leftCon">
-            <div id="BTImg"></div>
+            <div id="BT"></div>
             <Link
-              class="btn btn-primary d-xl-flex"
               id="withoutLogin"
               type="button"
               onClick={() => {
@@ -25,16 +17,18 @@ function Welcome(props) {
                 props.history.push('main');
               }}
             >
-              Let's Play!! (without Login)
+              Let's Play!!
+              <br />
+              (without Login)
             </Link>
           </section>
         </div>
         <div>
           <section id="rightCon">
+            <div id="welTeamName">Black Tardis</div>
             <input type="text" id="IDbox" placeholder="ID 를 입력하세요" />
             <input type="text" id="PWbox" placeholder="PW 를 입력하세요" />
-            <Link
-              class="btn btn-primary d-xl-flex"
+            <div
               id="loginButton"
               type="button"
               onClick={() => {
@@ -46,10 +40,11 @@ function Welcome(props) {
                 props.history.push('main');
               }}
             >
-              Let's Play!! (Login)
-            </Link>
+              Let's Play!!
+              <br />
+              (Login)
+            </div>
             <Link
-              class="btn btn-primary d-xl-flex"
               id="signupbutton"
               type="button"
               onClick={() => {
