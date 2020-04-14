@@ -1,6 +1,7 @@
 import React from 'react';
 import './Main.css';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 function Info(props) {
   const { nickname } = props;
@@ -39,6 +40,9 @@ function Info(props) {
                 onClick={() => {
                   props.logOut();
                   props.changeNickname('guest');
+                  axios.post('http://14.41.86.57:4100/users/signout', {
+                    refreshToken: props.token.refreshToken,
+                  });
                   alert('다시 로그인해 주세요');
                   props.history.push('/');
                 }}
