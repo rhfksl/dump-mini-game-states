@@ -9,3 +9,4 @@ export {
   CHANGE_CURRENTARTICLE,
   changeCurArticle,
 } from './changeCurrentArticle';
+export { MY_SCORE, getMyScore } from './myScore';
