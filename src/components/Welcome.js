@@ -11,7 +11,7 @@ function Welcome(props) {
           <section id="leftCon">
             <div id="BT"></div>
             <Link
-              to="main"
+              to="NoticeBoard"
               id="withoutLogin"
               type="button"
               onClick={() => {
