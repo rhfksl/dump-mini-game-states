@@ -49,225 +49,204 @@ class LeaderBoard extends Component {
 
   render() {
     return (
-      <section id="BG">
-        <Info />
-        <div id="wrapper">
-          <Menu />
-          <div className="page-content-wrapper">
-            <div className="container-fluid">
-              <div
-                className="btn btn-link"
-                role="button"
-                id="menu-toggle"
-                href="#menu-toggle"
-              >
-                <i className="fa fa-bars" />
-                <div id="menu-toggle" className="btn btn-link">
-                  menu
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-12">
-                  <section id="display">
-                    <div className="table-responsive" id="game1">
-                      <table className="table">
-                        <thead>
-                          <tr>
-                            <th>*</th>
-                            <th>nickname</th>
-                            <th>score</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>멋쟁이산</td>
-                            <td>100</td>
-                            <td />
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td></td>
-                            <td></td>
-                            <td />
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td></td>
-                            <td></td>
-                            <td />
-                          </tr>
-                          <tr>
-                            <td>4</td>
-                            <td></td>
-                            <td></td>
-                            <td />
-                          </tr>
-                          <tr>
-                            <td>5</td>
-                            <td></td>
-                            <td></td>
-                            <td />
-                          </tr>
-                          <tr>
-                            <td>6</td>
-                            <td></td>
-                            <td></td>
-                            <td />
-                          </tr>
-                          <tr>
-                            <td>7</td>
-                            <td></td>
-                            <td></td>
-                            <td />
-                          </tr>
-                          <tr>
-                            <td>8</td>
-                            <td></td>
-                            <td></td>
-                            <td />
-                          </tr>
-                          <tr>
-                            <td>9</td>
-                            <td></td>
-                            <td></td>
-                            <td />
-                          </tr>
-                          <tr>
-                            <td>10</td>
-                            <td></td>
-                            <td></td>
-                            <td />
-                          </tr>
-                          <tr>
-                            <td>My Score</td>
-                            <td>{this.props.myScore.nickname}</td>
-                            <td>{this.props.myScore.games[0].scores[0]}</td>
-                            <td />
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className="table-responsive" id="table2">
-                      <table className="table">
-                        <thead>
-                          <tr>
-                            <th>nickname</th>
-                            <th>score</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>멋쟁이산</td>
-                            <td>100</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>{this.props.myScore.nickname}</td>
-                            <td>{this.props.myScore.games[1].scores[0]}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div className="table-responsive" id="table3">
-                      <table className="table">
-                        <thead>
-                          <tr>
-                            <th>nickname</th>
-                            <th>score</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>멋쟁이산</td>
-                            <td>100</td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td>{this.props.myScore.nickname}</td>
-                            <td>{this.props.myScore.games[2].scores[0]}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </section>
-                </div>
-              </div>
+      <div className="row">
+        <div className="col-md-12">
+          <section id="display">
+            <div className="table-responsive" id="game1">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>*</th>
+                    <th>nickname</th>
+                    <th>score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>멋쟁이산</td>
+                    <td>100</td>
+                    <td />
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td></td>
+                    <td></td>
+                    <td />
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td></td>
+                    <td></td>
+                    <td />
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td></td>
+                    <td></td>
+                    <td />
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td></td>
+                    <td></td>
+                    <td />
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td></td>
+                    <td></td>
+                    <td />
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td></td>
+                    <td></td>
+                    <td />
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td></td>
+                    <td></td>
+                    <td />
+                  </tr>
+                  <tr>
+                    <td>9</td>
+                    <td></td>
+                    <td></td>
+                    <td />
+                  </tr>
+                  <tr>
+                    <td>10</td>
+                    <td></td>
+                    <td></td>
+                    <td />
+                  </tr>
+                  <tr>
+                    <td>My Score</td>
+                    <td>{this.props.myScore.nickname}</td>
+                    <td>{this.props.myScore.games[0].scores[0]}</td>
+                    <td />
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          </div>
+            <div className="table-responsive" id="table2">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>nickname</th>
+                    <th>score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>멋쟁이산</td>
+                    <td>100</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>{this.props.myScore.nickname}</td>
+                    <td>{this.props.myScore.games[1].scores[0]}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="table-responsive" id="table3">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>nickname</th>
+                    <th>score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>멋쟁이산</td>
+                    <td>100</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>{this.props.myScore.nickname}</td>
+                    <td>{this.props.myScore.games[2].scores[0]}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
         </div>
-      </section>
+      </div>
     );
   }
 }
