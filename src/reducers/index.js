@@ -70,7 +70,7 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         token: {
-          accesToken: action.token.accessToken,
+          accessToken: action.token.accessToken,
           refreshToken: action.token.refreshToken,
         },
       };
