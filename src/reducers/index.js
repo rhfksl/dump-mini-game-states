@@ -13,16 +13,7 @@ const initialState = {
   isLogined: false,
   displayMode: 'Game',
   gametype: '1',
-  articles: [
-    {
-      title: 'Hello world',
-      contents: 'This is contents example',
-      user_id: 2,
-      likes: 5,
-      dislikes: 1,
-      created_at: '2020-04-05 22:04:40',
-    },
-  ],
+  articles: [],
   article: [],
   nickname: 'guest',
   leaderBoard: [],

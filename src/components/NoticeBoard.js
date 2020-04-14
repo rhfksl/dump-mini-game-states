@@ -1,40 +1,36 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { withRouter, Link } from 'react-router-dom';
 import NoticeBoardLists from './NoticeBoardLists';
 import Info from '../containers/Info';
 import Menu from '../containers/Menu';
-import { withRouter, Link } from 'react-router-dom';
+
 const shortid = require('shortid');
 
 axios.defaults.withCredentials = true;
 class NoticeBoard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // articles: [],
-    };
-  }
-
   componentDidMount() {
     const config = {
+      // eslint-disable-next-line react/destructuring-assignment
       headers: { Authorization: this.props.token.accessToken },
     };
 
     axios
       .get('http://13.209.41.64:4100/articles', config)
       .then((res) => {
-        this.props.changeArticles(res.data);
+        const { changeArticles } = this.props;
+        changeArticles(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err));
   }
 
-  //확인용
   moveToArticle = (article) => {
-    this.props.changeCurrentArticle(article);
+    const { changeCurrentArticle } = this.props;
+    changeCurrentArticle(article);
   };
 
   render() {
-    const articles = this.props.articles;
+    const { articles } = this.props;
 
     return (
       <section id="BG">
@@ -49,7 +45,7 @@ class NoticeBoard extends Component {
                 id="menu-toggle"
                 href="#menu-toggle"
               >
-                <i className="fa fa-bars"></i>
+                <i className="fa fa-bars" />
                 <div id="menu-toggle" className="btn btn-link">
                   menu
                 </div>
@@ -86,7 +82,7 @@ class NoticeBoard extends Component {
                           ))}
                         </tbody>
                       </table>
-                      <button>
+                      <button type="button">
                         <Link to="/WriteArticle">글쓰기</Link>
                       </button>
                     </div>
