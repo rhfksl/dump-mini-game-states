@@ -11,7 +11,7 @@ function Welcome(props) {
           <section id="leftCon">
             <div id="BT"></div>
             <Link
-              to="NoticeBoard"
+              to="main"
               id="withoutLogin"
               type="button"
               onClick={() => {
@@ -51,7 +51,7 @@ function Welcome(props) {
                     );
                     // main페이지로 이동
 
-                    props.history.push('NoticeBoard');
+                    props.history.push('main');
                   })
                   .catch((error) => {
                     if (error.response.status === 401) {
