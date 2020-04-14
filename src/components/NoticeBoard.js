@@ -1,32 +1,44 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom';
-import NoticeBoardLists from './NoticeBoardLists';
+import NoticeBoardLists from '../containers/NoticeBoardLists';
 import Info from '../containers/Info';
 import Menu from '../containers/Menu';
+import './NoticeBoard.css';
 
 const shortid = require('shortid');
 
 axios.defaults.withCredentials = true;
 class NoticeBoard extends Component {
-  componentDidMount() {
-    const config = {
-      // eslint-disable-next-line react/destructuring-assignment
-      headers: { Authorization: this.props.token.accessToken },
+  constructor(props) {
+    super(props);
+    this.state = {
+      delete: false,
     };
+  }
 
+  componentDidMount() {
+    this.getArticles();
+  }
+
+  getArticles = () => {
     axios
-      .get('http://13.209.41.64:4100/articles', config)
+      .get('http://13.209.41.64:4100/articles')
       .then((res) => {
+        console.log('success');
         const { changeArticles } = this.props;
         changeArticles(res.data);
       })
       .catch((err) => alert(err));
-  }
+  };
 
   moveToArticle = (article) => {
     const { changeCurrentArticle } = this.props;
     changeCurrentArticle(article);
+  };
+
+  activateDeleteMode = () => {
+    this.setState({ delete: !this.state.delete });
   };
 
   render() {
@@ -55,7 +67,7 @@ class NoticeBoard extends Component {
                   <section id="display">
                     <div>
                       <table className="table">
-                        <thead className="thead-light">
+                        <thead id="asdf" className="thead-light">
                           <tr>
                             <th width="10%" scope="col">
                               번호
@@ -78,13 +90,41 @@ class NoticeBoard extends Component {
                               article={val}
                               idx={idx}
                               moveToArticle={this.moveToArticle}
+                              delete={this.state.delete}
+                              getArticles={this.getArticles}
                             />
                           ))}
                         </tbody>
                       </table>
-                      <button type="button">
-                        <Link to="/WriteArticle">글쓰기</Link>
-                      </button>
+                      <div id="asdf">
+                        {this.state.delete === false ? (
+                          <button
+                            type="button"
+                            id="delete"
+                            onClick={this.activateDeleteMode}
+                          >
+                            Delete
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            id="delete"
+                            onClick={this.activateDeleteMode}
+                          >
+                            취소
+                          </button>
+                        )}
+                        <button
+                          type="button"
+                          id="submit"
+                          onClick={() => {
+                            const { history } = this.props;
+                            history.push('/WriteArticle');
+                          }}
+                        >
+                          <Link to="/WriteArticle">글쓰기</Link>
+                        </button>
+                      </div>
                     </div>
                   </section>
                 </div>
