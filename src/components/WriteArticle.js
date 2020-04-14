@@ -3,6 +3,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Info from '../containers/Info';
 import Menu from '../containers/Menu';
+import './WriteArticle.css';
 
 axios.defaults.withCredentials = true;
 class WriteArticle extends Component {
@@ -81,13 +82,25 @@ class WriteArticle extends Component {
                           <textarea
                             className="form-control"
                             id="exampleFormControlTextarea1"
-                            rows="20"
+                            rows="15"
                             onChange={this.handleInputValue('contents')}
                           />
                         </div>
                       </form>
                       <div id="submit">
                         <button
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            this.props.history.push('/NoticeBoard');
+                          }}
+                        >
+                          Back
+                        </button>
+                      </div>
+                      <div id="submit">
+                        <button
+                          type="button"
                           onClick={(e) => {
                             e.preventDefault();
                             this.submitArticle();
