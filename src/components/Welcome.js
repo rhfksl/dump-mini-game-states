@@ -90,6 +90,7 @@ function Welcome(props) {
         </div>
       </div>
     </section>
+
     // <div>
     //   this is Welcome component
     //   {/* 아래 Link Component를 이용하여 회원가입 창으로 이동하세요 */}
