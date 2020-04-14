@@ -7,16 +7,34 @@ import {
   LEADER_BOARD,
   CHANGE_TOKEN,
   CHANGE_CURRENTARTICLE,
+  MY_SCORE,
 } from '../actions';
 
 const initialState = {
   isLogined: false,
-  displayMode: 'Game',
+  displayMode: 'NOTICEBOARD',
   gametype: '1',
   articles: [],
   article: [],
   nickname: 'guest',
-  leaderBoard: [],
+  leaderBoard: {},
+  myScore: {
+    nickname: 'black tardis',
+    games: [
+      {
+        gameTitle: 'Game 1',
+        scores: [33, 48, 52],
+      },
+      {
+        gameTitle: 'Game 2',
+        scores: [22, 48, 52, 32],
+      },
+      {
+        gameTitle: 'Game 3',
+        scores: [6, 11, 39, 32],
+      },
+    ],
+  },
   token: {
     accessToken: '',
     refreshToken: '',
@@ -33,6 +51,7 @@ const reducers = (state = initialState, action) => {
     }
 
     case CHANGE_DISPLAYMODE: {
+      console.log(action.displayMode);
       return {
         ...state,
         displayMode: action.displayMode,
@@ -70,7 +89,7 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         token: {
-          accesToken: action.token.accessToken,
+          accessToken: action.token.accessToken,
           refreshToken: action.token.refreshToken,
         },
       };
@@ -80,6 +99,13 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         article: action.article,
+      };
+    }
+
+    case MY_SCORE: {
+      return {
+        ...state,
+        myScore: action.myScore,
       };
     }
 

@@ -33,66 +33,45 @@ class NoticeBoard extends Component {
     const { articles } = this.props;
 
     return (
-      <section id="BG">
-        <Info />
-        <div id="wrapper">
-          <Menu />
-          <div className="page-content-wrapper">
-            <div className="container-fluid">
-              <div
-                className="btn btn-link"
-                role="button"
-                id="menu-toggle"
-                href="#menu-toggle"
-              >
-                <i className="fa fa-bars" />
-                <div id="menu-toggle" className="btn btn-link">
-                  menu
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-12">
-                  <section id="display">
-                    <div>
-                      <table className="table">
-                        <thead className="thead-light">
-                          <tr>
-                            <th width="10%" scope="col">
-                              번호
-                            </th>
-                            <th width="60%" scope="col">
-                              Title
-                            </th>
-                            <th width="10%" scope="col">
-                              Author
-                            </th>
-                            <th width="20%" scope="col">
-                              Created_at
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {articles.map((val, idx) => (
-                            <NoticeBoardLists
-                              key={shortid.generate()}
-                              article={val}
-                              idx={idx}
-                              moveToArticle={this.moveToArticle}
-                            />
-                          ))}
-                        </tbody>
-                      </table>
-                      <button type="button">
-                        <Link to="/WriteArticle">글쓰기</Link>
-                      </button>
-                    </div>
-                  </section>
-                </div>
-              </div>
+      <div className="row">
+        <div className="col-md-12">
+          <section id="display">
+            <div>
+              <table className="table">
+                <thead className="thead-light">
+                  <tr>
+                    <th width="10%" scope="col">
+                      번호
+                    </th>
+                    <th width="60%" scope="col">
+                      Title
+                    </th>
+                    <th width="10%" scope="col">
+                      Author
+                    </th>
+                    <th width="20%" scope="col">
+                      Created_at
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {articles.map((val, idx) => (
+                    <NoticeBoardLists
+                      key={shortid.generate()}
+                      article={val}
+                      idx={idx}
+                      moveToArticle={this.moveToArticle}
+                    />
+                  ))}
+                </tbody>
+              </table>
+              <button type="button">
+                <Link to="/WriteArticle">글쓰기</Link>
+              </button>
             </div>
-          </div>
+          </section>
         </div>
-      </section>
+      </div>
     );
   }
 }
