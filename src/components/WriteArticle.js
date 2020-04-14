@@ -37,7 +37,7 @@ class WriteArticle extends Component {
       .post('http://14.41.86.57:4100/articles', body, config)
       .then(() => {
         const { history } = this.props;
-        history.push('/NoticeBoard');
+        history.push('/main');
       })
       .catch((err) => alert(err));
   };
@@ -92,7 +92,7 @@ class WriteArticle extends Component {
                           type="button"
                           onClick={(e) => {
                             e.preventDefault();
-                            this.props.history.push('/NoticeBoard');
+                            this.props.history.push('/main');
                           }}
                         >
                           Back
