@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import Info from '../containers/Info';
 import Menu from '../containers/Menu';
-import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 class WriteArticle extends Component {
@@ -9,7 +10,7 @@ class WriteArticle extends Component {
     super(props);
     this.state = {
       title: '',
-      content: '',
+      contents: '',
     };
   }
 
@@ -20,15 +21,24 @@ class WriteArticle extends Component {
   };
 
   submitArticle = () => {
+    const { title, contents } = this.state;
+    const { nickname } = this.props;
     const body = {
-      title: this.state.title,
-      content: this.state.content,
-      nickname: this.state.nickname,
+      title,
+      contents,
+      nickname,
     };
     const config = {
+      // eslint-disable-next-line react/destructuring-assignment
       headers: { Authorization: this.props.token.accessToken },
     };
-    axios.post('http://14.41.86.57:4100/articles', body, config);
+    axios
+      .post('http://14.41.86.57:4100/articles', body, config)
+      .then(() => {
+        const { history } = this.props;
+        history.push('/NoticeBoard');
+      })
+      .catch((err) => alert(err));
   };
 
   render() {
@@ -45,7 +55,7 @@ class WriteArticle extends Component {
                 id="menu-toggle"
                 href="#menu-toggle"
               >
-                <i className="fa fa-bars"></i>
+                <i className="fa fa-bars" />
                 <div id="menu-toggle" className="btn btn-link">
                   menu
                 </div>
@@ -72,8 +82,8 @@ class WriteArticle extends Component {
                             className="form-control"
                             id="exampleFormControlTextarea1"
                             rows="20"
-                            onChange={this.handleInputValue('content')}
-                          ></textarea>
+                            onChange={this.handleInputValue('contents')}
+                          />
                         </div>
                       </form>
                       <div id="submit">
@@ -99,4 +109,4 @@ class WriteArticle extends Component {
   }
 }
 
-export default WriteArticle;
+export default withRouter(WriteArticle);
