@@ -12,10 +12,14 @@ function Main(props) {
   console.log(props);
   const display = () => {
     const { displayMode } = props;
-    if (displayMode === 'NOTICEBOARD') {
-      return <NoticeBoard />;
-    } else if (displayMode === 'LEADERBOARD') {
-      return <LeaderBoard />;
+
+    switch (displayMode) {
+      case 'NOTICEBOARD': {
+        return <NoticeBoard />;
+      }
+      case 'LEADERBOARD': {
+        return <LeaderBoard />;
+      }
     }
   };
   return (
