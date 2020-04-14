@@ -6,6 +6,7 @@ import {
   ARTICLES,
   LEADER_BOARD,
   CHANGE_TOKEN,
+  CHANGE_CURRENTARTICLE,
 } from '../actions';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   displayMode: 'Game',
   gametype: '1',
   articles: [],
+  article: [],
   nickname: 'guest',
   leaderBoard: [],
   token: {
@@ -71,6 +73,13 @@ const reducers = (state = initialState, action) => {
           accesToken: action.token.accessToken,
           refreshToken: action.token.refreshToken,
         },
+      };
+    }
+
+    case CHANGE_CURRENTARTICLE: {
+      return {
+        ...state,
+        article: action.article,
       };
     }
 

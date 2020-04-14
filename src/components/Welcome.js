@@ -11,14 +11,14 @@ function Welcome(props) {
       store의 state가 변경됩니다.
       함수 사용후 아래 div는 지워주세용~
       */}
-      {/* <div
+      <div
         onClick={(e) => {
           e.preventDefault();
           props.changeToken('asdf', 'qwer');
         }}
       >
         연습용 버튼
-      </div> */}
+      </div>
       <div>
         <div>
           <section id="leftCon">
@@ -41,7 +41,7 @@ function Welcome(props) {
           <section id="rightCon">
             <div id="welTeamName">Black Tardis</div>
             <input type="text" id="IDbox" placeholder="ID 를 입력하세요" />
-            <input type="password" id="PWbox" placeholder="PW 를 입력하세요" />
+            <input type="text" id="PWbox" placeholder="PW 를 입력하세요" />
             <div
               id="loginButton"
               type="button"
@@ -52,31 +52,17 @@ function Welcome(props) {
                 let obj = { user: {} };
                 obj.user.username = document.querySelector('#IDbox').value;
                 obj.user.password = document.querySelector('#PWbox').value;
-
+                console.log(obj);
                 axios.defaults.withCredentials = true;
                 axios
                   .post('http://13.209.41.64:4100/users/signin', obj)
                   .then((res) => {
                     console.log(res);
-
                     props.changeNickname(res.data.user.nickname);
-                    props.changeToken(
-                      res.data.accessToken,
-                      res.data.refreshToken,
-                    );
                     // main페이지로 이동
-                    console.log(props.changeNickname);
                     props.history.push('main');
                   })
-                  .catch((error) => {
-                    if (error.response.status === 401) {
-                      alert('Password를 확인해주세요');
-                    }
-                    if (error.response.status === 404) {
-                      alert('회원가입 해주세요');
-                    }
-                    console.log('여기다 여기', error.response);
-                  });
+                  .catch((error) => console.log('여기다 여기', error));
               }}
             >
               Let's Play!!
