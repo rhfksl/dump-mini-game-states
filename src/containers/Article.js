@@ -7,4 +7,15 @@ function mapReduxStateToReactProps(state) {
   };
 }
 
-export default connect(mapReduxStateToReactProps)(Article);
+function mapDispatchToProps(dispatch) {
+  return {
+    changeDisplayMode: (displayMode) => {
+      dispatch({ type: 'CHANGE_DISPLAYMODE', displayMode });
+    },
+    changeCurrentArticle: (curArticle) => {
+      dispatch({ type: 'CHANGE_CURRENTARTICLE', article: curArticle });
+    },
+  };
+}
+
+export default connect(mapReduxStateToReactProps, mapDispatchToProps)(Article);

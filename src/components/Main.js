@@ -5,6 +5,8 @@ import Info from '../containers/Info';
 import Menu from '../containers/Menu';
 import NoticeBoard from '../containers/NoticeBoard';
 import LeaderBoard from '../containers/LeaderBoard';
+import Article from '../containers/Article';
+import WriteArticle from '../containers/WriteArticle';
 import './Main.css';
 // import NoticeBoard from './NoticeBoard';
 
@@ -20,6 +22,15 @@ function Main(props) {
       case 'LEADERBOARD': {
         return <LeaderBoard />;
       }
+      case 'ARTICLE': {
+        return <Article />;
+      }
+      case 'WRITEARTICLE': {
+        return <WriteArticle />;
+      }
+
+      default:
+        return <NoticeBoard />;
     }
   };
   return (
