@@ -33,22 +33,35 @@ function Info(props) {
               </div>
             </li>
             <li className="nav-item" role="presentation">
-              <button
-                className="btn btn-primary"
-                id="logoutButton"
-                type="button"
-                onClick={() => {
-                  props.logOut();
-                  props.changeNickname('guest');
-                  axios.post('http://14.41.86.57:4100/users/signout', {
-                    refreshToken: props.token.refreshToken,
-                  });
-                  alert('다시 로그인해 주세요');
-                  props.history.push('/');
-                }}
-              >
-                Logout
-              </button>
+              {props.isLogined === false ? (
+                <button
+                  className="btn btn-primary"
+                  id="signUp"
+                  type="button"
+                  onClick={() => {
+                    props.history.push('/signup');
+                  }}
+                >
+                  Sign Up
+                </button>
+              ) : (
+                <button
+                  className="btn btn-primary"
+                  id="logoutButton"
+                  type="button"
+                  onClick={() => {
+                    props.logOut();
+                    props.changeNickname('guest');
+                    axios.post('http://14.41.86.57:4100/users/signout', {
+                      refreshToken: props.token.refreshToken,
+                    });
+                    alert('다시 로그인해 주세요');
+                    props.history.push('/');
+                  }}
+                >
+                  Logout
+                </button>
+              )}
             </li>
           </ul>
         </div>
