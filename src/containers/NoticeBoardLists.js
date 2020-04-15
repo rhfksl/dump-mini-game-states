@@ -8,4 +8,18 @@ function mapReduxStateToReactProps(state) {
   };
 }
 
-export default connect(mapReduxStateToReactProps)(NoticeBoardLists);
+function mapDispatchToProps(dispatch) {
+  return {
+    changeDisplayMode: (displayMode) => {
+      dispatch({ type: 'CHANGE_DISPLAYMODE', displayMode });
+    },
+    changeCurrentArticle: (article) => {
+      dispatch({ type: 'CHANGE_CURRENTARTICLE', article });
+    },
+  };
+}
+
+export default connect(
+  mapReduxStateToReactProps,
+  mapDispatchToProps,
+)(NoticeBoardLists);
