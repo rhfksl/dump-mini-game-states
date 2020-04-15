@@ -40,15 +40,15 @@ const initialState = {
     games: [
       {
         gameTitle: 'Game 1',
-        scores: [33, 48, 52],
+        scores: ['-'],
       },
       {
         gameTitle: 'Game 2',
-        scores: [22, 48, 52, 32],
+        scores: ['-'],
       },
       {
         gameTitle: 'Game 3',
-        scores: [6, 11, 39, 32],
+        scores: ['-'],
       },
     ],
   },
