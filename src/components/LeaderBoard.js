@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import Info from '../containers/Info';
-import Menu from '../containers/Menu';
 import './Main.css';
 import './leaderboard.css';
 import { gameType } from '../actions';
@@ -11,12 +9,21 @@ axios.defaults.withCredentials = true;
 class LeaderBoard extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      game1Score: ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+      game2Score: ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+      game3Score: ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+    };
   }
 
-  // makeTable() {}
-
   componentDidMount() {
+    this.getMyScore();
+    this.getGame1Score();
+    this.getGame2Score();
+    this.getGame3Score();
+  }
+
+  getMyScore() {
     const config = {
       headers: { Authorization: this.props.token.accessToken },
     };
@@ -27,224 +34,181 @@ class LeaderBoard extends Component {
         for (let i = 0; i < res.data.games.length; i += 1) {
           res.data.games[i].scores.sort((a, b) => b.place - a.place);
         }
-        console.log(res.data.games);
-        this.props.getMyScore(res.data);
+        this.props.changeMyScore(res.data);
       })
-      .then()
       .catch((err) => console.log(err));
+  }
 
-    const obj = {};
-    obj.gameTitle = '';
-
+  getGame1Score() {
     axios
-      .get('http://13.209.41.64:4100/scores/leaderboard', obj)
+      .post('http://13.209.41.64:4100/scores/leaderboard', {
+        gameTitle: 'Game 1',
+      })
       .then((res) => {
-        res.data.leaderboard.sort((a, b) => a.place - b.place);
-        this.props.changeLeaderBoard(res.data);
-        console.log(res);
-        // / (res) =>/
+        if (res.data.leaderboard.length < 10) {
+          while (res.data.leaderboard.length < 10) {
+            res.data.leaderboard.push({
+              place: '?',
+              nickname: '????',
+              score: '-',
+            });
+          }
+        }
+        this.setState({ game1Score: res.data.leaderboard });
+      })
+      .catch((error) => console.log('여기야 여기', error.response));
+  }
+
+  getGame2Score() {
+    axios
+      .post('http://13.209.41.64:4100/scores/leaderboard', {
+        gameTitle: 'Game 2',
+      })
+      .then((res) => {
+        if (res.data.leaderboard.length < 10) {
+          while (res.data.leaderboard.length < 10) {
+            res.data.leaderboard.push({
+              place: '?',
+              nickname: '????',
+              score: '-',
+            });
+          }
+        }
+        this.setState({ game2Score: res.data.leaderboard });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  getGame3Score() {
+    axios
+      .post('http://13.209.41.64:4100/scores/leaderboard', {
+        gameTitle: 'Game 3',
+      })
+      .then((res) => {
+        if (res.data.leaderboard.length < 10) {
+          while (res.data.leaderboard.length < 10) {
+            res.data.leaderboard.push({
+              place: '?',
+              nickname: '????',
+              score: '-',
+            });
+          }
+        }
+        this.setState({ game3Score: res.data.leaderboard });
       })
       .catch((err) => console.log(err));
   }
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-12">
-          <section id="display">
-            <div className="table-responsive" id="game1">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>*</th>
-                    <th>nickname</th>
-                    <th>score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>멋쟁이산</td>
-                    <td>100</td>
-                    <td />
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td></td>
-                    <td></td>
-                    <td />
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td></td>
-                    <td></td>
-                    <td />
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td></td>
-                    <td></td>
-                    <td />
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td></td>
-                    <td></td>
-                    <td />
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td></td>
-                    <td></td>
-                    <td />
-                  </tr>
-                  <tr>
-                    <td>7</td>
-                    <td></td>
-                    <td></td>
-                    <td />
-                  </tr>
-                  <tr>
-                    <td>8</td>
-                    <td></td>
-                    <td></td>
-                    <td />
-                  </tr>
-                  <tr>
-                    <td>9</td>
-                    <td></td>
-                    <td></td>
-                    <td />
-                  </tr>
-                  <tr>
-                    <td>10</td>
-                    <td></td>
-                    <td></td>
-                    <td />
-                  </tr>
-                  <tr>
-                    <td>My Score</td>
-                    <td>{this.props.myScore.nickname}</td>
-                    <td>{this.props.myScore.games[0].scores[0]}</td>
-                    <td />
-                  </tr>
-                </tbody>
-              </table>
+      <div className="page-content-wrapper">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <section id="display">
+                <div className="table-responsive" id="num">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th>Game</th>
+                      </tr>
+                      <tr>
+                        <th>*</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((val) => (
+                        <tr key={val}>
+                          <td id="middle">{val}</td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <td>My Score</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="table-responsive" id="table1">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th colSpan="2">Game1</th>
+                      </tr>
+                      <tr>
+                        <th>nickname</th>
+                        <th>score</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.game1Score.map(({ score, nickname }) => (
+                        <tr>
+                          <td id="middle">{nickname ? nickname : '????'}</td>
+                          <td id="right">{score ? score : '-'}</td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <td id="right" colSpan="2">
+                          {this.props.myScore.games[0].scores[0]}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="table-responsive" id="table2">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th colSpan="2">Game2</th>
+                      </tr>
+                      <tr>
+                        <th>nickname</th>
+                        <th>score</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.game2Score.map(({ score, nickname }) => (
+                        <tr>
+                          <td id="middle">{nickname ? nickname : '????'}</td>
+                          <td id="right">{score ? score : '-'}</td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <td id="right" colSpan="2">
+                          {this.props.myScore.games[1].scores[0]}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className="table-responsive" id="table3">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th colSpan="2">Game3</th>
+                      </tr>
+                      <tr>
+                        <th>nickname</th>
+                        <th>score</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.game3Score.map(({ score, nickname }) => (
+                        <tr>
+                          <td id="middle">{nickname ? nickname : '????'}</td>
+                          <td id="right">{score ? score : '-'}</td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <td id="right" colSpan="2">
+                          {this.props.myScore.games[2].scores[0]}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
             </div>
-            <div className="table-responsive" id="table2">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>nickname</th>
-                    <th>score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>멋쟁이산</td>
-                    <td>100</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>{this.props.myScore.nickname}</td>
-                    <td>{this.props.myScore.games[1].scores[0]}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="table-responsive" id="table3">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>nickname</th>
-                    <th>score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>멋쟁이산</td>
-                    <td>100</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>{this.props.myScore.nickname}</td>
-                    <td>{this.props.myScore.games[2].scores[0]}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
+          </div>
         </div>
       </div>
     );
