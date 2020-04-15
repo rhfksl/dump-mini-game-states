@@ -1,7 +1,7 @@
 import {
   IS_LOGINED,
   CHANGE_DISPLAYMODE,
-  GAME_TYPE,
+  SET_GAME,
   NICKNAME,
   ARTICLES,
   LEADER_BOARD,
@@ -13,11 +13,28 @@ import {
 const initialState = {
   isLogined: false,
   displayMode: 'NOTICEBOARD',
-  gametype: '1',
+  currentGame: null,
   articles: [],
   article: [],
   nickname: 'guest',
   leaderBoard: {},
+  gameList: [
+    {
+      gameID: 0,
+      gameTitle: 'Snake',
+      thumbnail: 'snake.png',
+    },
+    {
+      gameID: 1,
+      gameTitle: 'Tetris',
+      thumbnail: 'tetris.jpg',
+    },
+    {
+      gameID: 2,
+      gameTitle: 'Sudoku',
+      thumbnail: 'sudoku.png',
+    },
+  ],
   myScore: {
     nickname: 'black tardis',
     games: [
@@ -51,16 +68,15 @@ const reducers = (state = initialState, action) => {
     }
 
     case CHANGE_DISPLAYMODE: {
-      console.log(action.displayMode);
       return {
         ...state,
         displayMode: action.displayMode,
       };
     }
-    case GAME_TYPE: {
+    case SET_GAME: {
       return {
         ...state,
-        gametype: action.gametype,
+        currentGame: action.gameID,
       };
     }
 
