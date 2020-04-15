@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import NoticeBoardLists from '../containers/NoticeBoardLists';
-import Info from '../containers/Info';
-import Menu from '../containers/Menu';
 import './NoticeBoard.css';
+import { changeDisplaymode } from '../actions';
 
 const shortid = require('shortid');
 
@@ -23,9 +22,8 @@ class NoticeBoard extends Component {
 
   getArticles = () => {
     axios
-      .get('http://13.209.41.64:4100/articles')
+      .get('http://14.41.86.57:4100/articles')
       .then((res) => {
-        console.log('success');
         const { changeArticles } = this.props;
         changeArticles(res.data);
       })
@@ -101,11 +99,16 @@ class NoticeBoard extends Component {
                   type="button"
                   id="submit"
                   onClick={() => {
-                    const { history } = this.props;
-                    history.push('/WriteArticle');
+                    const { changeDisplayMode, nickname } = this.props;
+                    if (nickname === 'guest') {
+                      alert('로그인 후 이용해 주세요');
+                    } else {
+                      changeDisplayMode('WRITEARTICLE');
+                    }
                   }}
                 >
-                  <Link to="/WriteArticle">글쓰기</Link>
+                  글쓰기
+                  {/* <Link to="/WriteArticle">글쓰기</Link> */}
                 </button>
               </div>
             </div>

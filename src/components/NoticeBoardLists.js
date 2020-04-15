@@ -34,7 +34,21 @@ class NoticeBoardLists extends Component {
         <tr>
           <th scope="row">{idx}</th>
           <td onClick={this.moveToArticle}>
-            <Link to="/Article">{article.title}</Link>
+            <a
+              href="#"
+              onClick={() => {
+                const {
+                  changeDisplayMode,
+                  changeCurrentArticle,
+                  article,
+                } = this.props;
+                changeDisplayMode('ARTICLE');
+                changeCurrentArticle(article);
+              }}
+            >
+              {article.title}
+            </a>
+            {/* <Link to="/Article">{article.title}</Link> */}
           </td>
           <td>{article.nickname}</td>
           <td>{article.created_at}</td>
@@ -46,7 +60,15 @@ class NoticeBoardLists extends Component {
         <th scope="row">{idx}</th>
         <td onClick={this.moveToArticle}>
           <span id="what">
-            <Link to="/Article">{article.title}</Link>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+              {article.title}
+            </a>
+            {/* <Link to="/Article">{article.title}</Link> */}
           </span>
           <span>
             <button
