@@ -17,6 +17,9 @@ function mapDispatchToProps(dispatch) {
     changeCurrentArticle: (curArticle) => {
       dispatch({ type: 'CHANGE_CURRENTARTICLE', article: curArticle });
     },
+    changeDisplayMode: (displayMode) => {
+      dispatch({ type: 'CHANGE_DISPLAYMODE', displayMode });
+    },
   };
 }
 export default connect(

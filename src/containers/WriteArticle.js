@@ -8,4 +8,15 @@ function mapReduxStateToReactProps(state) {
   };
 }
 
-export default connect(mapReduxStateToReactProps)(WriteArticle);
+function mapDispatchToProps(dispatch) {
+  return {
+    changeDisplayMode: (displayMode) => {
+      dispatch({ type: 'CHANGE_DISPLAYMODE', displayMode });
+    },
+  };
+}
+
+export default connect(
+  mapReduxStateToReactProps,
+  mapDispatchToProps,
+)(WriteArticle);
