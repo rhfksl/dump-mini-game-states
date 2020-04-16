@@ -1,6 +1,6 @@
 #mainDisplay {
   box-sizing: border-box;
-  line-height: 85vh;
+  /* line-height: 85vh; */
   overflow-x: auto;
   margin: 0;
   padding: 10px;

@@ -1,7 +1,13 @@
 import React from 'react';
+import { App } from './Sudoku/src/App';
 
 const Sudoku = (props) => {
-  return <div>This is Sudoku game</div>;
+  const { token } = props;
+  return (
+    <div id="sudoku-root">
+      <App token={token} />
+    </div>
+  );
 };
 
 export default Sudoku;
