@@ -39,15 +39,15 @@ const initialState = {
     nickname: 'black tardis',
     games: [
       {
-        gameTitle: 'Game 1',
+        gameTitle: 'Snake',
         scores: ['-'],
       },
       {
-        gameTitle: 'Game 2',
+        gameTitle: 'Tetris',
         scores: ['-'],
       },
       {
-        gameTitle: 'Game 3',
+        gameTitle: 'Sudoku',
         scores: ['-'],
       },
     ],
@@ -118,7 +118,28 @@ const reducers = (state = initialState, action) => {
       };
     }
 
-    case MY_SCORE: {
+    case 'CHANGE_MY_SNAKE_SCORE': {
+      const changeMyscore = state.myScore;
+      changeMyscore.nickname = action.nickname;
+      state.myScore.games[0].scores = action.myScore;
+      return {
+        ...state,
+        myScore: changeMyscore,
+      };
+    }
+    case 'CHANGE_MY_TETRIS_SCORE': {
+      const changeMyscore = state.myScore;
+      changeMyscore.nickname = action.nickname;
+      state.myScore.games[1].scores = action.myScore;
+      return {
+        ...state,
+        myScore: changeMyscore,
+      };
+    }
+    case 'CHANGE_MY_SUDOKU_SCORE': {
+      const changeMyscore = state.myScore;
+      changeMyscore.nickname = action.nickname;
+      state.myScore.games[2].scores = action.myScore;
       return {
         ...state,
         myScore: action.myScore,

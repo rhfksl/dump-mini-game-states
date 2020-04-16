@@ -3,6 +3,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import './Main.css';
 import './leaderboard.css';
+const shortid = require('shortid');
 
 axios.defaults.withCredentials = true;
 class LeaderBoard extends Component {
@@ -23,6 +24,11 @@ class LeaderBoard extends Component {
   }
 
   getMyScore() {
+    const { nickname, changeMyScore } = this.props;
+
+    if (nickname === 'guest') {
+      return;
+    }
     const config = {
       headers: { Authorization: this.props.token.accessToken },
     };
@@ -30,10 +36,21 @@ class LeaderBoard extends Component {
     axios
       .get('http://13.209.41.64:4100/scores/scores', config)
       .then((res) => {
-        for (let i = 0; i < res.data.games.length; i += 1) {
-          res.data.games[i].scores.sort((a, b) => b.place - a.place);
-        }
-        this.props.changeMyScore(res.data);
+        // for (let i = 0; i < res.data.games.length; i += 1) {
+        //   res.data.games[i].scores.sort((a, b) => b.place - a.place);
+        // }
+        res.data.games.forEach((val) => {
+          if (val.gameTitle === 'Snake') {
+            const highestScore = val.scores.sort((a, b) => b - a);
+            changeMyScore('SNAKE', highestScore, nickname);
+          } else if (val.gameTitle === 'Tetris') {
+            const highestScore = val.scores.sort((a, b) => b - a);
+            changeMyScore('TETRIS', highestScore, nickname);
+          } else if (val.gameTitle === 'Sudoku') {
+            const highestScore = val.scores.sort((a, b) => b - a);
+            changeMyScore('TETRIS', highestScore, nickname);
+          }
+        });
       })
       .catch((err) => console.log(err));
   }
@@ -55,13 +72,13 @@ class LeaderBoard extends Component {
         }
         this.setState({ game1Score: res.data.leaderboard });
       })
-      .catch((error) => console.log('여기야 여기', error.response));
+      .catch((error) => console.log(error));
   }
 
   getGame2Score() {
     axios
       .post('http://13.209.41.64:4100/scores/leaderboard', {
-        gameTitle: 'Game 2',
+        gameTitle: 'Tetris',
       })
       .then((res) => {
         if (res.data.leaderboard.length < 10) {
@@ -99,6 +116,8 @@ class LeaderBoard extends Component {
   }
 
   render() {
+    const { nickname } = this.props;
+    console.log('마이 스코어를 출력하고싶어 ㅠㅠㅠㅠㅠㅠ', this.props);
     return (
       <div className="page-content-wrapper">
         <div className="container-fluid">
@@ -140,13 +159,15 @@ class LeaderBoard extends Component {
                     </thead>
                     <tbody>
                       {this.state.game1Score.map(({ score, nickname }) => (
-                        <tr>
+                        <tr key={shortid.generate()}>
                           <td id="middle">{nickname ? nickname : '????'}</td>
                           <td id="middle">{score ? score : '-'}</td>
                         </tr>
                       ))}
                       <tr>
-                        <td />
+                        <td id="middle">
+                          {nickname === 'guest' ? '-' : nickname}
+                        </td>
                         <td id="middle">
                           {this.props.myScore.games[0].scores[0]}
                         </td>
@@ -158,7 +179,7 @@ class LeaderBoard extends Component {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th colSpan="2">Game2</th>
+                        <th colSpan="2">Tetris</th>
                       </tr>
                       <tr>
                         <th>nickname</th>
@@ -167,13 +188,15 @@ class LeaderBoard extends Component {
                     </thead>
                     <tbody>
                       {this.state.game2Score.map(({ score, nickname }) => (
-                        <tr>
+                        <tr key={shortid.generate()}>
                           <td id="middle">{nickname ? nickname : '????'}</td>
                           <td id="middle">{score ? score : '-'}</td>
                         </tr>
                       ))}
                       <tr>
-                        <td />
+                        <td id="middle">
+                          {nickname === 'guest' ? '-' : nickname}
+                        </td>
                         <td id="middle">
                           {this.props.myScore.games[1].scores[0]}
                         </td>
@@ -194,13 +217,15 @@ class LeaderBoard extends Component {
                     </thead>
                     <tbody>
                       {this.state.game3Score.map(({ score, nickname }) => (
-                        <tr>
+                        <tr key={shortid.generate()}>
                           <td id="middle">{nickname ? nickname : '????'}</td>
                           <td id="middle">{score ? score : '-'}</td>
                         </tr>
                       ))}
                       <tr>
-                        <td />
+                        <td id="middle">
+                          {nickname === 'guest' ? '-' : nickname}
+                        </td>
                         <td id="middle">
                           {this.props.myScore.games[2].scores[0]}
                         </td>
