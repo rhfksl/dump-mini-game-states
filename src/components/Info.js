@@ -9,7 +9,13 @@ function Info(props) {
   return (
     <nav className="navbar navbar-light navbar-expand-md" id="nav">
       <div className="container-fluid">
-        <div className="navbar-brand" id="TeamName">
+        <div
+          className="navbar-brand"
+          id="TeamName"
+          onClick={() => {
+            props.history.push('/');
+          }}
+        >
           Black Tardis
         </div>
         <button
