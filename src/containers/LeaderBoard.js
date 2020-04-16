@@ -15,8 +15,22 @@ function mapDispatchToProps(dispatch) {
     changeLeaderBoard: (leaderBoard) => {
       dispatch({ type: 'LEADER_BOARD', leaderBoard });
     },
-    changeMyScore: (myScore) => {
-      dispatch({ type: 'MY_SCORE', myScore });
+    changeMyScore: (gameType, myScore, nickname) => {
+      switch (gameType) {
+        case 'SNAKE': {
+          dispatch({ type: 'CHANGE_MY_SNAKE_SCORE', myScore, nickname });
+          break;
+        }
+        case 'TETRIS': {
+          dispatch({ type: 'CHANGE_MY_TETRIS_SCORE', myScore, nickname });
+          break;
+        }
+        case 'SUDOKU': {
+          dispatch({ type: 'CHANGE_MY_SUDOKU_SCORE', myScore, nickname });
+          break;
+        }
+        default:
+      }
     },
   };
 }
