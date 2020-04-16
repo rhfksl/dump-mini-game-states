@@ -1,10 +1,10 @@
 #BG {
   background-image: url('./images/background.png');
   width: 100%;
-  height: 110vh;
+  height: 100vh;
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
 }
 
 #TeamName {
@@ -67,12 +67,12 @@
 
 #sidebar-wrapper {
   z-index: 1000;
-  position: fixed;
+  position: absolute;
   left: 250px;
   width: 0;
-  height: 100%;
+  height: 93%;
   margin-left: -250px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   background: rgb(76, 7, 119);
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -164,12 +164,12 @@ body {
 
 #sidebar-wrapper {
   z-index: 1000;
-  position: fixed;
+  position: absolute;
   left: 250px;
   width: 0;
-  height: 100%;
+  height: 93%;
   margin-left: -250px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   background: rgb(76, 7, 119);
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;

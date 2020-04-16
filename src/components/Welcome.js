@@ -33,7 +33,7 @@ function Welcome(props) {
   }
 
   return (
-    <section id="BG">
+    <section>
       <div>
         <div>
           <section id="leftCon">

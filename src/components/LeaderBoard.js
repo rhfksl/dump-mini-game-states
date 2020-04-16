@@ -3,7 +3,6 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import './Main.css';
 import './leaderboard.css';
-import { gameType } from '../actions';
 
 axios.defaults.withCredentials = true;
 class LeaderBoard extends Component {
@@ -123,7 +122,7 @@ class LeaderBoard extends Component {
                         </tr>
                       ))}
                       <tr>
-                        <td>My Score</td>
+                        <td id="middle">My Score</td>
                       </tr>
                     </tbody>
                   </table>
@@ -143,11 +142,12 @@ class LeaderBoard extends Component {
                       {this.state.game1Score.map(({ score, nickname }) => (
                         <tr>
                           <td id="middle">{nickname ? nickname : '????'}</td>
-                          <td id="right">{score ? score : '-'}</td>
+                          <td id="middle">{score ? score : '-'}</td>
                         </tr>
                       ))}
                       <tr>
-                        <td id="right" colSpan="2">
+                        <td />
+                        <td id="middle">
                           {this.props.myScore.games[0].scores[0]}
                         </td>
                       </tr>
@@ -169,11 +169,12 @@ class LeaderBoard extends Component {
                       {this.state.game2Score.map(({ score, nickname }) => (
                         <tr>
                           <td id="middle">{nickname ? nickname : '????'}</td>
-                          <td id="right">{score ? score : '-'}</td>
+                          <td id="middle">{score ? score : '-'}</td>
                         </tr>
                       ))}
                       <tr>
-                        <td id="right" colSpan="2">
+                        <td />
+                        <td id="middle">
                           {this.props.myScore.games[1].scores[0]}
                         </td>
                       </tr>
@@ -195,11 +196,12 @@ class LeaderBoard extends Component {
                       {this.state.game3Score.map(({ score, nickname }) => (
                         <tr>
                           <td id="middle">{nickname ? nickname : '????'}</td>
-                          <td id="right">{score ? score : '-'}</td>
+                          <td id="middle">{score ? score : '-'}</td>
                         </tr>
                       ))}
                       <tr>
-                        <td id="right" colSpan="2">
+                        <td />
+                        <td id="middle">
                           {this.props.myScore.games[2].scores[0]}
                         </td>
                       </tr>
