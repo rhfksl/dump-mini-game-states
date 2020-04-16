@@ -11,18 +11,27 @@ class NoticeBoardLists extends Component {
   };
 
   deleteArticle = () => {
-    if (this.props.nickname === this.props.article.nickname) {
-      const articleID = this.props.article.id;
+    // if (this.props.nickname === this.props.article.nickname) {
+    //   const articleID = this.props.article.id;
 
-      axios
-        .delete(`http://13.209.41.64:4100/articles/${articleID}`)
-        .then((res) => {
-          this.props.getArticles();
-        })
-        .catch((err) => alert(err));
-    } else {
-      alert('작성자만 글을 삭제할 수 있습니다');
-    }
+    //   axios
+    //     .delete(`http://13.209.41.64:4100/articles/${articleID}`)
+    //     .then((res) => {
+    //       this.props.getArticles();
+    //     })
+    //     .catch((err) => alert(err));
+    // } else {
+    //   alert('작성자만 글을 삭제할 수 있습니다');
+    // }
+
+    const articleID = this.props.article.id;
+
+    axios
+      .delete(`http://13.209.41.64:4100/articles/${articleID}`)
+      .then((res) => {
+        this.props.getArticles();
+      })
+      .catch((err) => alert(err));
   };
 
   render() {
