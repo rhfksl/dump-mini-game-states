@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 const sendScore = (props) => {
-  console.log(props);
-
   const { nickname, token } = props.options.user;
 
   if (nickname === 'guest' || token.accessToken === '') {
@@ -18,12 +16,12 @@ const sendScore = (props) => {
   axios
     .post(
       'http://13.209.41.64:4100/scores/scores',
-      { gameTitle: 'Snake', score: props.game.points.toString() },
+      { gameTitle: 'Snake', score: props.game.points },
       config,
     )
     .then(alert(`You loosed with ${props.game.points} points.`))
     .then((res) => console.log(res))
-    .catch((err) => console.log(err.response));
+    .catch((err) => console.log(err));
 };
 
 const Snake = (props) => {

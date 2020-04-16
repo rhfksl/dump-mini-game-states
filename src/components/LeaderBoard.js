@@ -58,7 +58,7 @@ class LeaderBoard extends Component {
   getGame1Score() {
     axios
       .post('http://13.209.41.64:4100/scores/leaderboard', {
-        gameTitle: 'Game 1',
+        gameTitle: 'Snake',
       })
       .then((res) => {
         if (res.data.leaderboard.length < 10) {
@@ -98,7 +98,7 @@ class LeaderBoard extends Component {
   getGame3Score() {
     axios
       .post('http://13.209.41.64:4100/scores/leaderboard', {
-        gameTitle: 'Game 3',
+        gameTitle: 'Sudoku',
       })
       .then((res) => {
         if (res.data.leaderboard.length < 10) {
@@ -150,7 +150,7 @@ class LeaderBoard extends Component {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th colSpan="2">Game1</th>
+                        <th colSpan="2">Snake</th>
                       </tr>
                       <tr>
                         <th>nickname</th>
@@ -208,7 +208,7 @@ class LeaderBoard extends Component {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th colSpan="2">Game3</th>
+                        <th colSpan="2">Sudoku</th>
                       </tr>
                       <tr>
                         <th>nickname</th>
