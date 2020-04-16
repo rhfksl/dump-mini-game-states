@@ -1,6 +1,5 @@
 import React from 'react';
 import { Context, SnakeGame } from 'react-game-snake';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
