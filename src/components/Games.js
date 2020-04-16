@@ -10,10 +10,10 @@ class Games extends Component {
 
   render() {
     const { GameDisplay } = gameComponents;
-
+    const { token } = this.props;
     return (
       <div id="minigamesdisplay">
-        <GameDisplay />
+        <GameDisplay token={token} />
       </div>
     );
   }

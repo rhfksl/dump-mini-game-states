@@ -6,6 +6,7 @@ const mapReduxStateToReactProps = (state) => {
     displayMode: state.displayMode,
     gameList: state.gameList,
     currentGame: state.currentGame,
+    token: state.token,
   };
 };
 

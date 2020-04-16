@@ -7,15 +7,15 @@ import './main.css';
 const shortid = require('shortid');
 
 const GameDisplay = (props) => {
+  const { token } = props;
+  console.log('token?', token);
   const { currentGame, gameList } = props;
   const isGameSelected = () => {
     if (currentGame) {
-      console.log(gameIndex[currentGame]);
-      console.log(currentGame);
       const Game = gameIndex[currentGame.gameTitle];
       return (
         <div>
-          <Game />
+          <Game token={token} />
         </div>
       );
     }
