@@ -36,7 +36,7 @@ function Main(props) {
     }
   };
   return (
-    <section id="BG">
+    <section>
       <Info />
       <div id="wrapper">
         <Menu />
