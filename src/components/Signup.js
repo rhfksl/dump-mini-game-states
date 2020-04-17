@@ -109,13 +109,7 @@ class Signup extends Component {
             <div>
               <nav className="navbar navbar-light navbar-expand-md" id="nav">
                 <div className="container-fluid">
-                  <div
-                    className="navbar-brand"
-                    id="TeamName"
-                    onClick={() => {
-                      props.history.push('/');
-                    }}
-                  >
+                  <div className="navbar-brand" id="TeamName">
                     Black Tardis
                   </div>
                 </div>
