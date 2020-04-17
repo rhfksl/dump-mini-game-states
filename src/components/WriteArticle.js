@@ -34,7 +34,7 @@ class WriteArticle extends Component {
       headers: { Authorization: this.props.token.accessToken },
     };
     axios
-      .post('http://14.41.86.57:4100/articles', body, config)
+      .post('http://13.209.41.64:4100/articles', body, config)
       .then(() => {
         const { changeDisplayMode } = this.props;
         changeDisplayMode('NOTICEBOARD');

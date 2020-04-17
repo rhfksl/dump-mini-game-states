@@ -62,7 +62,7 @@ class Signup extends Component {
       passwordCheck
     ) {
       axios
-        .post('http://14.41.86.57:4100/users/signup', body)
+        .post('http://13.209.41.64:4100/users/signup', body)
         .then((res) => {
           alert('다시 로그인해 주세요');
           this.setState({ redirect: true });
@@ -76,7 +76,7 @@ class Signup extends Component {
     let body = this.state;
 
     axios
-      .post(`http://14.41.86.57:4100/users/${url}`, body)
+      .post(`http://13.209.41.64:4100/users/${url}`, body)
       .then((res) => {
         if (url === 'checkID' && res.data === 'Username available') {
           let curState = this.state;
@@ -109,7 +109,13 @@ class Signup extends Component {
             <div>
               <nav className="navbar navbar-light navbar-expand-md" id="nav">
                 <div className="container-fluid">
-                  <div className="navbar-brand" id="TeamName">
+                  <div
+                    className="navbar-brand"
+                    id="TeamName"
+                    onClick={() => {
+                      props.history.push('/');
+                    }}
+                  >
                     Black Tardis
                   </div>
                 </div>

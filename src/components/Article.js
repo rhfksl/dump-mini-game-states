@@ -19,11 +19,11 @@ class Article extends Component {
     likeOrDislike === 'like' ? (likes += 1) : (dislikes += 1);
 
     axios
-      .put(`http://14.41.86.57:4100/articles/${id}`, { likes, dislikes })
+      .put(`http://13.209.41.64:4100/articles/${id}`, { likes, dislikes })
       .then(() => {
         alert('추가되었습니다');
         axios
-          .get('http://14.41.86.57:4100/articles')
+          .get('http://13.209.41.64:4100/articles')
           .then((res) => {
             const { changeCurrentArticle } = this.props;
             const update = res.data.filter((val) => val.id === id);

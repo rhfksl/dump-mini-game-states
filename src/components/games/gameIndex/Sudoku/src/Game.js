@@ -82,7 +82,7 @@ export const Game = (props) => {
 
     axios
       .post(
-        'http://14.41.86.57:4100/scores/scores',
+        'http://13.209.41.64:4100/scores/scores',
         {
           gameTitle: 'Sudoku',
           score: totalScore,

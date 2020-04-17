@@ -117,7 +117,6 @@ class LeaderBoard extends Component {
 
   render() {
     const { nickname } = this.props;
-    console.log('마이 스코어를 출력하고싶어 ㅠㅠㅠㅠㅠㅠ', this.props);
     return (
       <div className="page-content-wrapper">
         <div className="container-fluid">
