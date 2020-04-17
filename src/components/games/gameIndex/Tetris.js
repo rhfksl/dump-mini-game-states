@@ -19,7 +19,7 @@ const postScore = (score, props) => {
 
   const body = { gameTitle: 'Tetris', score };
   axios
-    .post('http://14.41.86.57:4100/scores/scores', body, config)
+    .post('http://13.209.41.64:4100/scores/scores', body, config)
     .then((res) => {
       console.log(res);
     })

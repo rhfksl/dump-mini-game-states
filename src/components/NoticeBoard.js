@@ -22,7 +22,7 @@ class NoticeBoard extends Component {
 
   getArticles = () => {
     axios
-      .get('http://14.41.86.57:4100/articles')
+      .get('http://13.209.41.64:4100/articles')
       .then((res) => {
         const { changeArticles } = this.props;
         changeArticles(res.data);
