@@ -7,7 +7,13 @@ function Menu(props) {
   return (
     <div id="sidebar-wrapper">
       <ul className="sidebar-nav">
-        <li className="d-xl-flex sidebar-brand" id="BTImg" />
+        <li
+          className="d-xl-flex sidebar-brand"
+          id="BTImg"
+          onClick={() => {
+            props.history.push('/');
+          }}
+        />
         <li
           onClick={() => {
             setGame(null);
