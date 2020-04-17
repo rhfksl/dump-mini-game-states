@@ -2,6 +2,7 @@ import React from 'react';
 import { Context, SnakeGame } from 'react-game-snake';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import '../../Main.css';
 
 const sendScore = (props) => {
   const { nickname, token } = props.options.user;
@@ -19,14 +20,14 @@ const sendScore = (props) => {
       { gameTitle: 'Snake', score: props.game.points },
       config,
     )
-    .then(alert(`You loosed with ${props.game.points} points.`))
+    .then(alert(`${nickname} 님의 점수는 ${props.game.points} 점 입니다.`))
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
 
 const Snake = (props) => {
   return (
-    <div>
+    <div className="container" id="snakeGameTag">
       <SnakeGame
         user={props}
         colors={{
@@ -34,10 +35,10 @@ const Snake = (props) => {
           food: '#9b59b6',
           snake: '#3498db',
         }}
-        countOfHorizontalFields={50}
-        countOfVerticalFields={30}
-        fieldSize={15}
-        loopTime={200}
+        countOfHorizontalFields={25}
+        countOfVerticalFields={25}
+        fieldSize={20}
+        loopTime={150}
         pauseAllowed={true}
         restartAllowed={true}
         onLoose={sendScore}
@@ -48,10 +49,8 @@ const Snake = (props) => {
           alert(`You won with ${context.game.points} points.`)
         }
       />
-      {console.log()}
-      {/* <button type="button" onClick={()=>}>Start</button> */}
-      <button type="button">Pause</button>
-      <button type="button">Resume</button>
+      <div id="textInSnake">Press 'P' for stop game</div>
+      <div id="textInSnake">Press 'R' for restart game</div>
     </div>
   );
 };
