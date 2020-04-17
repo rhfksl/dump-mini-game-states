@@ -278,3 +278,16 @@ body {
     margin-right: 0;
   }
 }
+
+#textInSnake {
+  margin-bottom: 30px;
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+}
+
+#snakeGameTag canvas {
+  margin-left: 13%;
+  margin-top: 13%;
+  margin-bottom: 4%;
+}
