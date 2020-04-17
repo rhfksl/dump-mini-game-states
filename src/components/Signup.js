@@ -116,7 +116,7 @@ class Signup extends Component {
               </nav>
             </div>
 
-            <div className="container">
+            <div className="signUpContainer">
               <div className="row">
                 <div id="title" className="col-7">
                   Sign up
