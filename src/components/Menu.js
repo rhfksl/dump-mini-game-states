@@ -18,6 +18,7 @@ function Menu(props) {
           onClick={() => {
             setGame(null);
             changeDisplayMode('GAMES');
+            console.log('');
           }}
         >
           Games
